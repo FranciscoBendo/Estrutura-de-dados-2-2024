@@ -1,0 +1,27 @@
+#include <stdio.h>
+void troca(int *vetor, int i, int j){
+    int temp = vetor[i];
+    vetor[i] = vetor[j];
+    vetor[j] = temp;
+}
+
+void bubble(int vetor[], int n){
+    for(int i = 0; i < n - 1; i++){
+        //o último elemento i já está no lugar
+        for(int j = 0; j < n - i - 1; j++){
+            if(vetor[j] > vetor[j + 1])
+                troca(vetor, j, j+1);
+        }
+    }
+}
+int main() {
+    int vetor[5] = {5, 4, 3, 2, 1};
+
+    
+    bubble(vetor, 5);
+    
+    for(int i = 0; i < 5; i++){
+        printf("%d", vetor[i]);
+    }
+    return 0;
+}
