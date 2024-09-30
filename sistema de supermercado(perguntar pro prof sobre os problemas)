@@ -1,0 +1,145 @@
+#include <stdio.h>
+#include <string.h>
+
+typedef struct {int codigo; char nome[30]; float preco;} Produto; //Cria o tipo Produto
+
+Produto produtos[50]; //Armazena os produtos
+
+typedef struct {Produto produto; int quantidade;} Carrinho; //Cria o tipo Carrinho
+
+Carrinho carrinhoArr[50]; //Armazena o carrinho
+
+void cadastrarProduto(int cod, char name[30], float preco, int i){ //int i controla a posição do array em que o produto
+    produtos[i].codigo = cod;                                     // será armazenado
+    strcpy(produtos[i].nome, name[30]);
+    produtos[i].preco = preco;
+}
+
+void listarProduto(int i){ //i controla a posição do array
+    printf("%d\n", produtos[i].codigo);
+    printf("%s\n", produtos[i].nome);
+    printf("%.2f\n", produtos[i].preco);
+}
+
+void comprarProduto(int i, int quantidade){ //i controla a posição do array
+    carrinhoArr[i].produto.codigo = produtos[i].codigo;
+    strcpy(carrinhoArr[i].produto.nome, produtos[i].nome);
+    carrinhoArr[i].produto.preco = produtos[i].preco;
+    carrinhoArr[i].quantidade = quantidade;
+}
+
+void visualizarCarrinho(int i){ //i controla a posição do array
+    printf("%d\n", carrinhoArr[i].produto.codigo);
+    printf("%s\n", carrinhoArr[i].produto.nome);
+    printf("%.2f\n", carrinhoArr[i].produto.preco);
+    printf("%d\n", carrinhoArr[i].quantidade);
+}
+
+void fecharPedido(int a){
+    float quantia;
+    for(int i = 0; i < a; i++){ //i controla a posição do array, a é a quantidade de elementos total do pedido menos 1
+    quantia += carrinhoArr[i].produto.preco * carrinhoArr[i].quantidade;
+    }
+
+    printf("%.2f\n", quantia);
+
+    for(int i = 0; i < a; i++){ //Limpa o carrinho
+    carrinhoArr[i].produto.codigo = 0;
+    strcpy(carrinhoArr[i].produto.nome, "");
+    carrinhoArr[i].produto.preco = 0;
+    carrinhoArr[i].quantidade = 0;
+    }
+}
+
+void temNoCarrinho(int a){ //Mostra o que tem no carrinho
+    for(int i = 0; i < a; i++){
+    printf("%d\n", carrinhoArr[i].produto.codigo);
+    printf("%s\n", carrinhoArr[i].produto.nome);
+    printf("%.2f\n", carrinhoArr[i].produto.preco);
+    printf("%d\n", carrinhoArr[i].quantidade);
+    }
+}
+
+void pegarProdutoPorCodigo(int cod, int i){ //Retorna as informações de um produto através de um código
+    for(int x; x<i; x++){
+        if(cod == produtos[x].codigo){
+        printf("%d\n", produtos[x].codigo);
+        printf("%s\n", produtos[x].nome);
+        printf("%.2f\n", produtos[x].preco);
+    }else {
+        printf("Este produto nao existe\n");
+    } 
+}
+}
+
+void infoProduto(int i){ //Mostra as informações de um produto apontado por i
+    printf("Codigo: %d\nNome: %s\nPreco: %.2f\n", produtos[i].codigo, produtos[i].nome, produtos[i].preco);
+}
+
+void menu(){ //Gerencia o fluxo do software 
+int i = 0, cod, n, x;
+char nome[30];
+float preco;
+    printf("Bem vindo ao sistema do Super Mercado X!\n");
+    printf("Escolha o que voce quer fazer: 1 - Cadastrar produtos, 2 - listar produtos, 3 - Comprar produtos, 4 - Visualizar carrinho, 5 - Fechar pedido, 6 - Mostrar o que tem no carrinho, 7 - Pegar um produto por um codigo, 8 - mostrar as informacoes de um produto e 9 - sair do sistema.\n");
+
+    scanf("%d", &n);
+    fflush(stdin);
+    switch (n)
+    {
+    case 1:
+        printf("Digite o codigo, o nome e o preco do produto:\n");
+        scanf("%d", &cod);
+        fgets(nome, 30, stdin);
+        scanf("%f", &preco);
+        fflush(stdin);
+        cadastrarProduto(cod, nome[30], preco, i = 0);
+        ++i;
+        break;
+    case 2:
+    if(i>0){
+        for(x = 0; x < i; x++){
+            listarProduto(x);
+        }
+    }else{
+        printf("Nao ha produtos");
+    }
+    break;
+    case 3:
+    for(x = 0; x < i; x++){
+        comprarProduto(x, i);
+    }
+    break;
+    case 4:
+    for (x=0;x<i;x++)
+    {
+        visualizarCarrinho(x);
+    }
+    break;
+    case 5:
+        fecharPedido(i);
+        break;
+    case 6:
+        temNoCarrinho(i);
+        break;
+    case 7:
+        pegarProdutoPorCodigo(cod, i);
+        break;
+    case 8:
+        printf("Digite o numero do produto que voce deseja\n");
+        scanf("%d", &x);
+        infoProduto(x);
+        x = 0;
+        break;
+    case 9:
+        printf("Saindo do sistema.");
+        break;
+    default:
+        printf("Invalido.");
+        break;
+    }
+}
+
+int main(){
+menu();
+}
