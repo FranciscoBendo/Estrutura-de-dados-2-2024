@@ -61,7 +61,7 @@ void temNoCarrinho(int a){ //Mostra o que tem no carrinho
 }
 
 void pegarProdutoPorCodigo(int cod, int i){ //Retorna as informações de um produto através de um código
-    for(int x; x<i; x++){
+    for(int x=0; x<i; x++){
         if(cod == produtos[x].codigo){
         printf("%d\n", produtos[x].codigo);
         printf("%s\n", produtos[x].nome);
