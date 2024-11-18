@@ -1,15 +1,27 @@
 #include <stdio.h>
 
-int procuraBinaria(int x, int vet[]){ //a lógica tá na direção certa, mas ainda precisa de ajustes
-    int meio = (int)sizeof(vet)/2;
+void procuraBinaria(int valor, int vet[], int tam){ //a lógica tá na direção certa, mas ainda precisa de ajustes
+    int inicio = 0;
+    int fim = tam - 1;
 
-    if(x == vet[meio]){
-        printf("\n%d", x);
-    }else if(x < vet[meio]){
-        return procuraBinaria(x, vet[meio]);
-    }else{
-        return procuraBinaria(x, vet[meio]);
+    while(inicio <= fim){
+        int meio = inicio + (fim - inicio)/2;
+
+        if(vet[meio] == valor){
+            printf("\n%d", vet[meio]);
+            break;
+        }
+        else if(vet[meio] < valor){
+            inicio = meio + 1; 
+        }
+        else if(vet[meio] > valor){
+            fim = meio - 1;
+        }
+        else{
+            printf("\nValor nao encontrado");
+        }
     }
+   
 }
 
  //void procurar(int x, int vet[]){
@@ -26,13 +38,14 @@ int procuraBinaria(int x, int vet[]){ //a lógica tá na direção certa, mas ai
     //}
 //}
 
-void main(){
+int main(){
     int vetor[] = {1, 2, 3, 4, 5};
+    int tamanho = sizeof(vetor);
     int valor;
 
     printf("Digite o valor que deseja procurar no vetor\n");
     scanf("%d", &valor);
 
-    procuraBinaria(valor, &vetor);
-
+    procuraBinaria(valor, vetor, tamanho);
+    
 }
