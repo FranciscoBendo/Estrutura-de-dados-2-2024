@@ -1,0 +1,53 @@
+#include <stdio.h>
+
+void jogar(int varCase, int *pontuacao, int *resposta){
+    switch (varCase){ // esse switch recebe uma variavel para determinar a dificuldade do jogo
+    
+    case 1: // facil: entre 0 e 10
+
+        // chama uma função rand pros numeros e para as operações, cria um if pra fazer as operações, verificar a resposta e atribuir as devidas pontuações
+
+        break;
+    case 2: // medio: entre 0 e 100
+
+        // chama uma função rand pros numeros e para as operações, cria um if pra fazer as operações 
+
+        break;
+    case 3: // dificil: entre 0 e 1000
+
+        // chama uma função rand pros numeros e para as operações, cria um if pra fazer as operações 
+
+        break;
+    case 4: // insano: entre 0 e 10000
+
+        // chama uma função rand pros numeros e para as operações, cria um if pra fazer as operações 
+
+        break;
+
+    default: // mostra mensagem de erro
+
+        break;
+    }
+}
+
+
+int main(){
+    int x;
+    int pontuacao;
+    int resposta;
+    do{
+        jogar(x, &pontuacao, &resposta);
+        if resposta != resptrue{
+            vc errou
+
+        }
+        else{
+            acertou
+        }
+
+        pressione 1 para terminar o jogo
+
+        
+    }while(cont!=1)
+
+}
